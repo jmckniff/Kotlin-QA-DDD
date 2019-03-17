@@ -7,6 +7,7 @@ import ValueObjects.Reputation
 import aggregates.Contributor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import qa.domain.events.AnswerUnacceptedEvent
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 import java.util.*
@@ -15,7 +16,8 @@ internal class QuestionTests {
 
     @Test
     fun acceptAnswer_Should_Queue_AnswerAccepted_Event() {
-        val question = getDefaultQuestion()
+        val author = getDefaultAuthor()
+        val question = getDefaultQuestion(author)
         val answer = getDefaultAnswer(question.author)
 
         question.acceptAnswer(answer, question.getAuthorIdentity())
@@ -26,21 +28,40 @@ internal class QuestionTests {
     }
 
     @Test
+    fun unacceptAnswer_Should_Queue_UnacceptTheAnswer() {
+        val author = getDefaultAuthor()
+        val question = getDefaultQuestion(author)
+        val answer = getDefaultAnswer(question.author)
+        question.acceptAnswer(answer, question.getAuthorIdentity())
+
+        question.unacceptAnswer(answer, question.getAuthorIdentity())
+
+        assertEquals(false, question.hasAcceptedAnswer, "The question should NOT have an accepted answer")
+        assertEquals(null, question.acceptedAnswer, "The accepted answer should be the same as the answer")
+        assertEquals(true, question.queuedEvents.any { it is AnswerUnacceptedEvent }, "An answer unaccepted event should have been raised")
+    }
+
+    @Test
     fun addAnswer_Should_Add_An_Answer() {
-        var question = getDefaultQuestion()
-        var answer = getDefaultAnswer(question.author)
+        val author = getDefaultAuthor()
+        val question = getDefaultQuestion(author)
+        val answer = getDefaultAnswer(question.author)
 
         question.addAnswer(answer)
 
         assertEquals(1, question.answers.count(), "The question should have one answer")
     }
 
-    private fun getDefaultQuestion() : Question {
+    private fun getDefaultAuthor() : Contributor {
         val name = Name("Jamie", "Mckniff")
         val contributorIdentity = ContributorIdentity(UUID.randomUUID())
         val author = Contributor(contributorIdentity, name, Reputation(100))
-        val questionIdentity = QuestionIdentity(UUID.randomUUID())
 
+        return author
+    }
+
+    private fun getDefaultQuestion(author : Contributor) : Question {
+        val questionIdentity = QuestionIdentity(UUID.randomUUID())
         val question = Question(questionIdentity, author, "What does the fox say?", "I need to know what the fox says.",  mutableListOf())
 
         return question
@@ -49,7 +70,6 @@ internal class QuestionTests {
     private fun getDefaultAnswer(author: Contributor): Answer {
         val questionIdentity = QuestionIdentity(UUID.randomUUID())
         val contributor = Contributor(author.identity, Name("Anna", "Lewicki"), Reputation(0))
-
         val answer = Answer(questionIdentity, contributor, "The fox says WAPAPAPOW PA POW PA POW!", isAccepted = false)
 
         return answer
