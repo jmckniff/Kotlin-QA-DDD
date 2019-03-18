@@ -1,9 +1,10 @@
 package aggregates
 
-import Entities.Answer
+import qa.domain.entities.Answer
 import Events.AnswerAcceptedEvent
 import qa.domain.events.AnswerUnacceptedEvent
 import qa.domain.exceptions.InvalidContributorException
+import qa.domain.valueObjects.AnswerIdentity
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 
@@ -11,7 +12,7 @@ class Question(val identity : QuestionIdentity,
                val author : Contributor,
                val title : String,
                val description : String,
-               answers : MutableList<Answer>) : AggregateRoot() {
+               answers : MutableList<Answer> = mutableListOf()) : AggregateRoot() {
 
     var answers: MutableList<Answer> = answers
         private set
@@ -50,5 +51,9 @@ class Question(val identity : QuestionIdentity,
 
     fun getAuthorIdentity(): ContributorIdentity {
         return author.identity
+    }
+
+    fun getAnswer(answerIdentity: AnswerIdentity): Answer {
+        return answers.first { it.identity == answerIdentity}
     }
 }

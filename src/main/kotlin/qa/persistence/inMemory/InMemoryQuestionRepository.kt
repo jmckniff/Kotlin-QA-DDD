@@ -13,11 +13,11 @@ import java.util.*
 @Repository
 class InMemoryQuestionRepository : QuestionRepository {
 
-   private val _author = Contributor(ContributorIdentity(UUID.randomUUID()), Name("Jamie", "Mckniff"), Reputation(1000))
+    private val _author = Contributor(ContributorIdentity(UUID.randomUUID()), Name("Jamie", "Mckniff"), Reputation(1000))
 
     private var _questions : MutableList<Question> = mutableListOf<Question>(
-            Question(QuestionIdentity(UUID.randomUUID()), _author,"Some Question Title 1", "Some description", mutableListOf()),
-            Question(QuestionIdentity(UUID.randomUUID()), _author, "Some Question Title 2", "Some description", mutableListOf())
+            Question(QuestionIdentity(UUID.randomUUID()), _author,"Some QuestionDto Title 1", "Some description", mutableListOf()),
+            Question(QuestionIdentity(UUID.randomUUID()), _author, "Some QuestionDto Title 2", "Some description", mutableListOf())
     )
 
     override fun getQuestionsByAuthorId(authorIdentity: ContributorIdentity): List<Question> {
@@ -26,6 +26,10 @@ class InMemoryQuestionRepository : QuestionRepository {
 
     override fun createQuestion(question: Question) {
         _questions.add(question)
+    }
+
+    override fun getQuestionById(questionIdentity: QuestionIdentity): Question {
+        return _questions.first { it.identity == questionIdentity }
     }
 
 }

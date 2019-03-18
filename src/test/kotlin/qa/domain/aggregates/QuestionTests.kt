@@ -1,13 +1,14 @@
 package tests.Aggregates
 
 import aggregates.Question
-import Entities.Answer
+import qa.domain.entities.Answer
 import ValueObjects.Name
 import ValueObjects.Reputation
 import aggregates.Contributor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import qa.domain.events.AnswerUnacceptedEvent
+import qa.domain.valueObjects.AnswerIdentity
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 import java.util.*
@@ -70,7 +71,11 @@ internal class QuestionTests {
     private fun getDefaultAnswer(author: Contributor): Answer {
         val questionIdentity = QuestionIdentity(UUID.randomUUID())
         val contributor = Contributor(author.identity, Name("Anna", "Lewicki"), Reputation(0))
-        val answer = Answer(questionIdentity, contributor, "The fox says WAPAPAPOW PA POW PA POW!", isAccepted = false)
+        val answer = Answer(
+                AnswerIdentity(UUID.randomUUID()),
+                questionIdentity,
+                contributor,
+                "The fox says WAPAPAPOW PA POW PA POW!")
 
         return answer
 

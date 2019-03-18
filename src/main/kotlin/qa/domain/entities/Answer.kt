@@ -1,12 +1,12 @@
-package Entities
+package qa.domain.entities
 
-import Events.AnswerAcceptedEvent
 import aggregates.Contributor
 import aggregates.Entity
+import qa.domain.valueObjects.AnswerIdentity
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 
-class Answer(val questionId : QuestionIdentity, val author : Contributor, val description : String, isAccepted: Boolean) : Entity() {
+class Answer(val identity : AnswerIdentity, val questionId : QuestionIdentity, val author : Contributor, val description : String, isAccepted: Boolean = false) : Entity() {
 
     var isAccepted : Boolean = isAccepted
         private set
