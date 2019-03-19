@@ -17,21 +17,21 @@ class QuestionController(val questionService: QuestionService) {
         return questions
     }
 
-    @RequestMapping(value = "/", method = arrayOf(RequestMethod.POST))
+    @RequestMapping("/", method = arrayOf(RequestMethod.POST))
     fun createQuestion(@RequestBody questionDto: QuestionDto): QuestionDto {
 
         questionService.askQuestion(questionDto)
         return questionDto
     }
 
-    @GetMapping("/{questionId}")
+    @RequestMapping("/{questionId}")
     fun getQuestionsById(@PathVariable questionId : UUID): QuestionDto {
 
         val questions = questionService.getQuestion(questionId)
         return questions
     }
 
-    @RequestMapping(value = "/{questionId}/Answer", method = arrayOf(RequestMethod.POST))
+    @RequestMapping("/{questionId}/Answer", method = arrayOf(RequestMethod.POST))
     fun answerQuestion(@PathVariable questionId : UUID, @RequestBody answerDto: AnswerDto): AnswerDto {
 
         questionService.answerQuestion(questionId, answerDto)

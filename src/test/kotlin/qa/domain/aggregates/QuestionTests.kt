@@ -20,8 +20,9 @@ internal class QuestionTests {
         val author = getDefaultAuthor()
         val question = getDefaultQuestion(author)
         val answer = getDefaultAnswer(question.author)
+        question.addAnswer(answer)
 
-        question.acceptAnswer(answer, question.getAuthorIdentity())
+        question.acceptAnswer(answer, author.identity)
 
         assertEquals(true, question.hasAcceptedAnswer, "The question should have an accepted answer")
         assertEquals(question.acceptedAnswer, answer, "The accepted answer should be the same as the answer")
