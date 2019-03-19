@@ -28,24 +28,12 @@ class Question(val identity : QuestionIdentity,
     }
 
     fun acceptAnswer(answer : Answer, contributorIdentity : ContributorIdentity) {
-
-        if (contributorIdentity != author.identity) {
-            throw InvalidContributorException("Only the question author may accept the answer")
-        }
-
-        answer.accept()
-        answers.add(answer)
-
+        answer.accept(contributorIdentity)
         queueEvent(AnswerAcceptedEvent(answer))
     }
 
     fun unacceptAnswer(answer : Answer, contributorIdentity: ContributorIdentity) {
-        if (contributorIdentity != author.identity) {
-            throw InvalidContributorException("Only the question author may unaccept the answer")
-        }
-
-        answer.unaccept()
-
+        answer.unaccept(contributorIdentity)
         queueEvent(AnswerUnacceptedEvent(answer))
     }
 

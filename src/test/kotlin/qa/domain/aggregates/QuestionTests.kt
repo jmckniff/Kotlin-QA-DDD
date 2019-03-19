@@ -29,7 +29,7 @@ internal class QuestionTests {
     }
 
     @Test
-    fun unacceptAnswer_Should_Queue_UnacceptTheAnswer() {
+    fun unacceptAnswer_Should_Queue_AnswerUnacceptedEvent() {
         val author = getDefaultAuthor()
         val question = getDefaultQuestion(author)
         val answer = getDefaultAnswer(question.author)
@@ -69,15 +69,12 @@ internal class QuestionTests {
     }
 
     private fun getDefaultAnswer(author: Contributor): Answer {
-        val questionIdentity = QuestionIdentity(UUID.randomUUID())
-        val contributor = Contributor(author.identity, Name("Anna", "Lewicki"), Reputation(0))
         val answer = Answer(
                 AnswerIdentity(UUID.randomUUID()),
-                questionIdentity,
-                contributor,
+                author.identity,
+                author,
                 "The fox says WAPAPAPOW PA POW PA POW!")
 
         return answer
-
     }
 }

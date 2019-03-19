@@ -15,11 +15,22 @@ import java.util.*
 @Service
 class QuestionService (val questionRepository: QuestionRepository, val authorRepository: AuthorRepository) {
 
+
+    // Todo this should return a lightweight summary of the question
     fun getQuestions(authorId : UUID) : List<QuestionDto> {
         var authorIdentity = ContributorIdentity(UUID.randomUUID())
         var questions = questionRepository.getQuestionsByAuthorId(authorIdentity)
 
-        return questions.map { QuestionDto(it.identity.id, it.author.identity.id, it.title, it.description) }
+        return questions.map {
+            QuestionDto(
+                it.identity.id,
+                it.author.identity.id,
+                it.title,
+                it.description,
+                it.answers.map {
+                    AnswerDto(it.identity.id, it.author.identity.id, it.description)
+                })
+        }
     }
 
     fun askQuestion(questionDto: QuestionDto) {
@@ -33,13 +44,26 @@ class QuestionService (val questionRepository: QuestionRepository, val authorRep
         questionRepository.createQuestion(question)
     }
 
-    fun answerQuestion(answerDto : AnswerDto) {
+    fun getQuestion(questionId: UUID): QuestionDto {
+        val question = questionRepository.getQuestionById(QuestionIdentity(questionId))
+
+        return QuestionDto(
+                question.identity.id,
+                question.author.identity.id,
+                question.title,
+                question.description,
+                question.answers.map {
+                    AnswerDto(it.identity.id, it.author.identity.id, it.description)
+                })
+    }
+
+    fun answerQuestion(questionId : UUID, answerDto : AnswerDto) {
         val author = authorRepository.getAuthorById(ContributorIdentity(answerDto.authorId))
-        val question = questionRepository.getQuestionById(QuestionIdentity(answerDto.questionId))
+        val question = questionRepository.getQuestionById(QuestionIdentity(questionId))
 
         val answer = Answer(
             AnswerIdentity(answerDto.id),
-            question.identity,
+            question.author.identity,
             author,
             answerDto.description)
 
