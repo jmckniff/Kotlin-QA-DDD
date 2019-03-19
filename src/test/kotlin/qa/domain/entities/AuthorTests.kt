@@ -1,4 +1,4 @@
-package tests.Aggregates
+package qa.domain.entities
 
 import ValueObjects.Name
 import ValueObjects.Reputation

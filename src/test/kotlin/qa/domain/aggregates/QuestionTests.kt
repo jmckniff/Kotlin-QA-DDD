@@ -1,4 +1,4 @@
-package tests.Aggregates
+package qa.domain.aggregates
 
 import aggregates.Question
 import qa.domain.entities.Answer
