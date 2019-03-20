@@ -1,7 +1,7 @@
 package qa.services
 
-import aggregates.Question
 import org.springframework.stereotype.Service
+import qa.domain.aggregates.Question
 import qa.domain.entities.Answer
 import qa.domain.ports.AuthorRepository
 import qa.domain.ports.QuestionRepository

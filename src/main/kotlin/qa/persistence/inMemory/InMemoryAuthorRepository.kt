@@ -1,11 +1,11 @@
 package qa.persistence.inMemory
 
-import ValueObjects.Name
-import ValueObjects.Reputation
-import aggregates.Contributor
 import org.springframework.stereotype.Repository
 import qa.domain.ports.AuthorRepository
+import qa.domain.valueObjects.Contributor
 import qa.domain.valueObjects.ContributorIdentity
+import qa.domain.valueObjects.Name
+import qa.domain.valueObjects.Reputation
 import java.util.*
 
 @Repository

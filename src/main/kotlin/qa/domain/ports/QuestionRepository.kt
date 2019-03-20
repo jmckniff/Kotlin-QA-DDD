@@ -1,6 +1,6 @@
 package qa.domain.ports
 
-import aggregates.Question
+import qa.domain.aggregates.Question
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 

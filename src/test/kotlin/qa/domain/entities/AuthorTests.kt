@@ -1,11 +1,11 @@
 package qa.domain.entities
 
-import ValueObjects.Name
-import ValueObjects.Reputation
-import aggregates.Contributor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import qa.domain.valueObjects.Contributor
 import qa.domain.valueObjects.ContributorIdentity
+import qa.domain.valueObjects.Name
+import qa.domain.valueObjects.Reputation
 import java.util.*
 
 
@@ -26,7 +26,6 @@ internal class AuthorTests {
 
         assertEquals(100, reputationSore, "The authors reputation score should be 100")
     }
-
 
     fun getDefaultAuthor(reputationScore : Int = 0) : Contributor {
         val name = Name("Jamie", "Mckniff")

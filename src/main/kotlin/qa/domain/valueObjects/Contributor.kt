@@ -1,9 +1,4 @@
-package aggregates
-
-import ValueObjects.Name
-import ValueObjects.Reputation
-import qa.domain.valueObjects.ContributorIdentity
-import java.util.*
+package qa.domain.valueObjects
 
 class Contributor (val identity: ContributorIdentity, val name: Name, val reputation: Reputation) {
 
@@ -14,5 +9,4 @@ class Contributor (val identity: ContributorIdentity, val name: Name, val reputa
     fun getReputationScore(): Int {
         return reputation.score
     }
-
 }

@@ -1,10 +1,10 @@
-package aggregates
+package qa.domain.aggregates
 
 import qa.domain.entities.Answer
-import Events.AnswerAcceptedEvent
+import qa.domain.events.AnswerAcceptedEvent
 import qa.domain.events.AnswerUnacceptedEvent
-import qa.domain.exceptions.InvalidContributorException
 import qa.domain.valueObjects.AnswerIdentity
+import qa.domain.valueObjects.Contributor
 import qa.domain.valueObjects.ContributorIdentity
 import qa.domain.valueObjects.QuestionIdentity
 

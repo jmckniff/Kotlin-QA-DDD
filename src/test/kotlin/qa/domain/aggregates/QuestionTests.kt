@@ -1,16 +1,10 @@
 package qa.domain.aggregates
 
-import aggregates.Question
 import qa.domain.entities.Answer
-import ValueObjects.Name
-import ValueObjects.Reputation
-import aggregates.Contributor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import qa.domain.events.AnswerUnacceptedEvent
-import qa.domain.valueObjects.AnswerIdentity
-import qa.domain.valueObjects.ContributorIdentity
-import qa.domain.valueObjects.QuestionIdentity
+import qa.domain.valueObjects.*
 import java.util.*
 
 internal class QuestionTests {

@@ -1,6 +1,6 @@
 package qa.domain.ports
 
-import aggregates.Contributor
+import qa.domain.valueObjects.Contributor
 import qa.domain.valueObjects.ContributorIdentity
 
 interface AuthorRepository {

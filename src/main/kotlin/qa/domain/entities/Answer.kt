@@ -1,11 +1,9 @@
 package qa.domain.entities
 
-import aggregates.Contributor
-import aggregates.Entity
 import qa.domain.exceptions.InvalidContributorException
 import qa.domain.valueObjects.AnswerIdentity
+import qa.domain.valueObjects.Contributor
 import qa.domain.valueObjects.ContributorIdentity
-import qa.domain.valueObjects.QuestionIdentity
 
 class Answer(val identity : AnswerIdentity,
              private val questionAuthorIdentity : ContributorIdentity,
@@ -32,8 +30,4 @@ class Answer(val identity : AnswerIdentity,
         isAccepted = false
     }
 
-
-    fun getAuthorIdentity() : ContributorIdentity {
-        return author.identity
-    }
 }

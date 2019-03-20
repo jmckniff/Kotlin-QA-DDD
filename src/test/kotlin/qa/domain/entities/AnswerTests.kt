@@ -1,14 +1,10 @@
 package qa.domain.entities
 
-import ValueObjects.Name
-import ValueObjects.Reputation
-import aggregates.Contributor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import qa.domain.exceptions.InvalidContributorException
-import qa.domain.valueObjects.AnswerIdentity
-import qa.domain.valueObjects.ContributorIdentity
+import qa.domain.valueObjects.*
 import java.util.*
 
 internal class AnswerTests {
@@ -53,7 +49,7 @@ internal class AnswerTests {
         val answer = getDefaultAnswer(author, true)
 
         assertThrows<InvalidContributorException> {
-            answer.accept(randomContributor)
+            answer.unaccept(randomContributor)
         }
     }
 

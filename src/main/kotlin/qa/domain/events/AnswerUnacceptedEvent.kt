@@ -1,7 +1,7 @@
 package qa.domain.events
 
 import qa.domain.entities.Answer
-import ValueObjects.DomainEvent
+import qa.domain.valueObjects.DomainEvent
 
 class AnswerUnacceptedEvent(val answer: Answer) : DomainEvent() {
 

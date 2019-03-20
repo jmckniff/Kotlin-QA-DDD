@@ -1,6 +1,6 @@
-package aggregates
+package qa.domain.aggregates
 
-import ValueObjects.DomainEvent
+import qa.domain.valueObjects.DomainEvent
 
 open class AggregateRoot {
     private val _queuedEvents = mutableListOf<DomainEvent>()
