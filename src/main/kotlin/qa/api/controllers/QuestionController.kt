@@ -10,7 +10,7 @@ import java.util.*
 @RequestMapping("/api/question")
 class QuestionController(val questionService: QuestionService) {
 
-    @RequestMapping("/Author/{authorId}")
+    @RequestMapping("/Author/{authorId}", method = arrayOf(RequestMethod.GET))
     fun getQuestionsByAuthorId(@PathVariable authorId : UUID): List<QuestionDto> {
 
         val questions = questionService.getQuestions(authorId)
@@ -24,7 +24,7 @@ class QuestionController(val questionService: QuestionService) {
         return questionDto
     }
 
-    @RequestMapping("/{questionId}")
+    @RequestMapping("/{questionId}", method = arrayOf(RequestMethod.GET))
     fun getQuestionById(@PathVariable questionId : UUID): QuestionDto {
 
         val questions = questionService.getQuestion(questionId)
