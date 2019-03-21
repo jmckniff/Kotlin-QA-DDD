@@ -25,7 +25,7 @@ class QuestionController(val questionService: QuestionService) {
     }
 
     @RequestMapping("/{questionId}")
-    fun getQuestionsById(@PathVariable questionId : UUID): QuestionDto {
+    fun getQuestionById(@PathVariable questionId : UUID): QuestionDto {
 
         val questions = questionService.getQuestion(questionId)
         return questions

@@ -68,7 +68,9 @@ internal class QuestionTests {
                 AnswerIdentity(UUID.randomUUID()),
                 author.identity,
                 author,
-                "The fox says WAPAPAPOW PA POW PA POW!")
+                "The fox says WAPAPAPOW PA POW PA POW!",
+                false,
+                0)
 
         return answer
     }

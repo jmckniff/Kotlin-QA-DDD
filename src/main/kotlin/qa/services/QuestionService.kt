@@ -28,7 +28,7 @@ class QuestionService (val questionRepository: QuestionRepository, val authorRep
                 it.title,
                 it.description,
                 it.answers.map {
-                    AnswerDto(it.identity.id, it.author.identity.id, it.description)
+                    AnswerDto(it.identity.id, it.author.identity.id, it.description, it.isAccepted, it.votes)
                 })
         }
     }
@@ -53,7 +53,12 @@ class QuestionService (val questionRepository: QuestionRepository, val authorRep
                 question.title,
                 question.description,
                 question.answers.map {
-                    AnswerDto(it.identity.id, it.author.identity.id, it.description)
+                    AnswerDto(
+                        it.identity.id,
+                        it.author.identity.id,
+                        it.description,
+                        it.isAccepted,
+                        it.votes)
                 })
     }
 
@@ -65,7 +70,9 @@ class QuestionService (val questionRepository: QuestionRepository, val authorRep
             AnswerIdentity(answerDto.id),
             question.author.identity,
             author,
-            answerDto.description)
+            answerDto.description,
+                false,
+                0)
 
         question.addAnswer(answer)
     }
